@@ -7,4 +7,5 @@ Keep in mind this game engine is heavily work in progress, and features may come
   - Setup the physics system
   - Handle all collisions
   - Allow for child objects on the game object system
+  - Setup a Audio system with Attenuation options for if the game needs semi directional audio
   - Error testing, lots and lots of error testing

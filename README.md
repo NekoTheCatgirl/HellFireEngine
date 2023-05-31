@@ -5,7 +5,7 @@ Keep in mind this game engine is heavily work in progress, and features may come
 
 This game engine is intended for more experienced developers as its a rather low level game engine, and not very beginner friendly.
 
-Keep scrolling for a bit of a intro to how to use this engine.
+[Quick Setup](https://github.com/HellFireNeko/HellFireEngine/tree/main#quick-setup)
 
 # To do:
   - [ ] Setup the physics system

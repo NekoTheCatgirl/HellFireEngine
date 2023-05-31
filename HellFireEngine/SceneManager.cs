@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Serilog;
 
@@ -19,13 +20,6 @@ namespace HellFireEngine
             CurrentScene.SetSceneManager(this);
             Instance = this;
         }
-
-        public SceneManager(Scene startScene, EngineOptions engineOptions) : this(startScene)
-        {
-            EngineOptions = engineOptions;
-        }
-
-        public EngineOptions EngineOptions { get; } = new();
 
         public GraphicsDeviceManager GraphicsDeviceManager { get; set; }
 
@@ -56,11 +50,37 @@ namespace HellFireEngine
             LoadContent();
         }
 
+        public static T FindObjectOfType<T>() where T : MonoBehaviour
+        {
+            foreach (var x in Instance.CurrentScene.GameObjects)
+            {
+                if (x.GetComponent<T>() != null)
+                {
+                    return x.GetComponent<T>();
+                }
+            }
+            return null;
+        }
+
+        public static List<T> FindObjectsOfType<T>() where T : MonoBehaviour
+        {
+            var objects = new List<T>();
+            Instance.CurrentScene.GameObjects.ForEach(x =>
+            {
+                if (x.GetComponent<T>() != null)
+                {
+                    objects.Add(x.GetComponent<T>());
+                }
+            });
+            return objects;
+        }
+
         public static void Stop()
         {
             Instance.Exit();
         }
 
+        #region Boilerplate code...
         protected override void Initialize()
         {
             _input = new Input();
@@ -79,7 +99,7 @@ namespace HellFireEngine
 
         protected override void UnloadContent()
         {
-            CurrentScene?.UnloadContent();
+            CurrentScene?.Dispose();
             base.UnloadContent();
         }
 
@@ -95,5 +115,6 @@ namespace HellFireEngine
             CurrentScene?.Draw(gameTime);
             base.Draw(gameTime);
         }
+        #endregion
     }
 }

@@ -125,6 +125,16 @@ namespace HellFireEngine
                 first.Y > second.Y ? first.Y : second.Y);
         }
 
+        public static float Distance(PointF first, PointF second)
+        {
+            return Vector2.Distance(first, second);
+        }
+
+        public static float DistanceSquared(PointF first, PointF second)
+        {
+            return Vector2.DistanceSquared(first, second);
+        }        
+
         public static implicit operator Vector2(PointF point)
         {
             return new Vector2(point.X, point.Y);

@@ -10,6 +10,13 @@ namespace HellFireEngine.Renderer
         public SpriteEffects Effect { get; set; } = SpriteEffects.None;
         public float LayerDepth { get; set; } = 0f;
 
+        public override void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            Sprite?.Dispose();
+            GC.ReRegisterForFinalize(this);
+        }
+
         public override void Draw(GameTime gameTime)
         {
             SpriteBatch.Draw(Sprite,

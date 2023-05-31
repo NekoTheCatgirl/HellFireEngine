@@ -1,7 +1,7 @@
 ﻿namespace HellFireEngine
 {
-    public class EngineOptions
+    public static class EngineOptions
     {
-        public bool EnableLogger = true;
+        public static bool EnableLogger = true;
     }
 }

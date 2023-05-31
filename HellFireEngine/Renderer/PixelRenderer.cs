@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace HellFireEngine.Renderer
@@ -11,6 +12,13 @@ namespace HellFireEngine.Renderer
     {
         private readonly Dictionary<Point, Color> Pixels = new();
         private readonly Texture2D PixelTexture;
+
+        public override void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            PixelTexture?.Dispose();
+            GC.ReRegisterForFinalize(this);
+        }
 
         public Color GetPixel(Point point)
         {

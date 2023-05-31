@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using HellFireEngine.Interfaces;
 using HellFireEngine.Physics;
-using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace HellFireEngine
 {
     public class GameObject : DrawableGameComponent, ITransform
     {
+        public string Name = "GameObject";
         public SpriteBatch SpriteBatch;
 
         public GameObject(Vector2 position, float rotation, Vector2 scale, SceneManager game) : base(game)
@@ -22,12 +24,24 @@ namespace HellFireEngine
             _scale = scale;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            GC.SuppressFinalize(this);
+            _components.ForEach(c => c.Dispose());
+            GC.ReRegisterForFinalize(this);
+            base.Dispose(disposing);
+        }
+
         private readonly List<MonoBehaviour> _components = new();
 
         private int MinDrawOrder = 0;
         private int MaxDrawOrder = 0;
         private int MinUpdateOrder = 0;
         private int MaxUpdateOrder = 0;
+
+        public static T FindObjectOfType<T>() where T : MonoBehaviour => SceneManager.FindObjectOfType<T>();
+
+        public static List<T> FindObjectsOfType<T>() where T : MonoBehaviour => SceneManager.FindObjectsOfType<T>();
 
         public T AddComponent<T>() where T : MonoBehaviour, new()
         {
@@ -36,31 +50,38 @@ namespace HellFireEngine
                 _gameObject = this
             };
 
+            return AddComponent(component);
+        }
+
+        public T AddComponent<T>(T component) where T : MonoBehaviour
+        {
+            component._gameObject = this;
+
             _components.Add(component);
 
             return component;
         }
 
-        public void AddComponent<T>(T component) where T : MonoBehaviour
-        {
-            component._gameObject = this;
-
-            _components.Add(component);
-        }
-
         public T GetComponent<T>() where T : MonoBehaviour
         {
-            var distinct = _components
-                .Where(x => typeof(T).IsAssignableFrom(x.GetType()))
-                .FirstOrDefault() as T;
+            if (_components.Any(x => typeof(T).IsAssignableFrom(x.GetType())))
+            {
+                var distinct = _components
+                    .Where(x => typeof(T).IsAssignableFrom(x.GetType()))
+                    .FirstOrDefault() as T;
 
-            return distinct;
+                return distinct;
+            }
+            return null;
         }
 
         public void RemoveComponent<T>() where T : MonoBehaviour
         {
-            var component = GetComponent<T>();
-            _components.Remove(component);
+            if (_components.Any(x => typeof(T).IsAssignableFrom(x.GetType())))
+            {
+                var component = GetComponent<T>();
+                _components.Remove(component);
+            }
         }
 
         public void UpdateOrders()

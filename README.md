@@ -68,5 +68,5 @@ To get more in depth on things like custom scripting and such, you will have to 
 
 # Common issues:
   - "HellFireEngine namespace does not exist!" - This is because you forgot to add the HellFireEngine.dll file as a reference to your project, add it and you should see that error go away.
-  - "It says that my sprite does not exist" - Either you did not spell the name right when you ran load, or you may have forgotten to press build.
+  - "It says that my sprite does not exist" - Either you did not spell the name right when you ran load, or you may have forgotten to press build on the content builder.
   - "Microsoft.Xna.Framework namespace does not exist!" - This could be a result of forgetting to install the MonoGame extension, or that you forgot to select the MonoGame Cross Platform environment.

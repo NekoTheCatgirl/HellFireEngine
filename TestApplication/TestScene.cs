@@ -1,6 +1,8 @@
 ﻿using HellFireEngine;
+using HellFireEngine.Audio;
 using HellFireEngine.Renderer;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TestApplication
@@ -22,7 +24,27 @@ namespace TestApplication
             };
             gameobjectTest.AddComponent(testObject);
 
-            GameObjects.Add(gameobjectTest);
+            Add(gameobjectTest);
+
+            var audioListenerObject = new GameObject(new Vector2(60, 80), 0f, new Vector2(1, 1), SceneManager);
+            var audioListener = new HellFireEngine.Audio.AudioListener()
+            {
+                AttenuateVolume = false
+            };
+            audioListenerObject.AddComponent(audioListener);
+            audioListenerObject.AddComponent<VolumeKnob>();
+            Add(audioListenerObject);
+
+            var audioSourceObject = new GameObject(new Vector2(0, 0), 0f, new Vector2(1, 1), SceneManager);
+            var audioSource = new AudioSource()
+            {
+                AudioClip = Content.Load<SoundEffect>("Something"),
+                IsLooping = true
+            };
+            audioSourceObject.AddComponent(audioSource);
+            audioSourceObject.AddComponent<MoveObject>();
+            audioSourceObject.Name = "Audio Source Test";
+            Add(audioSourceObject);
         }
     }
 }

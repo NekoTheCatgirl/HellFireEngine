@@ -25,3 +25,9 @@
 /processorParam:TextureFormat=Color
 /build:Button-BlueDeep-02.jpg
 
+#begin Something.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Something.wav
+

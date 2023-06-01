@@ -40,7 +40,8 @@ namespace HellFireEngine
             {
                 if (value < MinimumZoom || value > MaximumZoom)
                 {
-                    Log.Error("Zoom must be between MinimumZoom and MaximumZoom");
+                    if (EngineOptions.EnableLogger)
+                        Log.Error("Zoom must be between MinimumZoom and MaximumZoom");
                     return;
                 }
 
@@ -55,7 +56,8 @@ namespace HellFireEngine
             {
                 if (value < 0)
                 {
-                    Log.Error("MinimumZoom must be greater than zero");
+                    if (EngineOptions.EnableLogger)
+                        Log.Error("MinimumZoom must be greater than zero");
                     return;
                 }
 
@@ -75,7 +77,8 @@ namespace HellFireEngine
             {
                 if (value < 0)
                 {
-                    Log.Error("MaximumZoom must be greater than zero");
+                    if (EngineOptions.EnableLogger)
+                        Log.Error("MaximumZoom must be greater than zero");
                     return;
                 }
 

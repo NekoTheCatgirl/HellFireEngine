@@ -46,13 +46,11 @@ namespace HellFireEngine.Renderer
             Pixels = pixels;
         }
 
-        public Vector2 Position { get; set; } = Vector2.Zero;
-
         public override void Draw(GameTime gameTime)
         {
             foreach (var pair in Pixels)
             {
-                Vector2 point = new Vector2(pair.Key.X, pair.Key.Y) + Position;
+                Vector2 point = new Vector2(pair.Key.X, pair.Key.Y) + Transform.Position;
                 SpriteBatch.Draw(PixelTexture, point, pair.Value);
             }
         }

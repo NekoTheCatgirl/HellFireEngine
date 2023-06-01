@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Principal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Serilog;
@@ -14,6 +15,20 @@ namespace HellFireEngine
         public SceneManager(Scene startScene)
         {
             GraphicsDeviceManager = new GraphicsDeviceManager(this);
+
+            if (EngineOptions.ForceFullscreen)
+            {
+                GraphicsDeviceManager.IsFullScreen = true;
+
+                GraphicsDeviceManager.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+                GraphicsDeviceManager.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+            }
+            else
+            {
+                GraphicsDeviceManager.PreferredBackBufferWidth = EngineOptions.ScreenWidth;
+                GraphicsDeviceManager.PreferredBackBufferHeight = EngineOptions.ScreenHeight;
+            }
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             CurrentScene = startScene;
@@ -91,8 +106,7 @@ namespace HellFireEngine
 
         protected override void LoadContent()
         {
-            if (SpriteBatch == null)
-                SpriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch ??= new SpriteBatch(GraphicsDevice);
             CurrentScene?.LoadContent();
             base.LoadContent();
         }

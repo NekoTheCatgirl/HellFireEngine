@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Serilog;
 
 namespace HellFireEngine
 {
@@ -16,10 +15,9 @@ namespace HellFireEngine
         public GameObject GameObject { get { return _gameObject; } }
         public ITransform Transform => _gameObject;
 
-        public virtual void Dispose()
-        {
-
-        }
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
+        public virtual void Dispose() { }
+#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
 
         public static T FindObjectOfType<T>() where T : MonoBehaviour => SceneManager.FindObjectOfType<T>();
 

@@ -24,11 +24,14 @@ namespace HellFireEngine
             _scale = scale;
         }
 
+        ~GameObject()
+        {
+            Dispose();
+        }
+
         protected override void Dispose(bool disposing)
         {
-            GC.SuppressFinalize(this);
             _components.ForEach(c => c.Dispose());
-            GC.ReRegisterForFinalize(this);
             base.Dispose(disposing);
         }
 

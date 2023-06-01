@@ -2,6 +2,6 @@
 {
     internal static class Version
     {
-        internal const string EngineVersion = "V0.0.3";
+        internal const string EngineVersion = "V0.0.4";
     }
 }

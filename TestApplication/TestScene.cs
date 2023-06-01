@@ -27,11 +27,7 @@ namespace TestApplication
             Add(gameobjectTest);
 
             var audioListenerObject = new GameObject(new Vector2(60, 80), 0f, new Vector2(1, 1), SceneManager);
-            var audioListener = new HellFireEngine.Audio.AudioListener()
-            {
-                AttenuateVolume = false
-            };
-            audioListenerObject.AddComponent(audioListener);
+            audioListenerObject.AddComponent<HellFireEngine.Audio.AudioListener>();
             audioListenerObject.AddComponent<VolumeKnob>();
             Add(audioListenerObject);
 

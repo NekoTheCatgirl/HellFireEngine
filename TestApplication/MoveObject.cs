@@ -25,8 +25,6 @@ namespace TestApplication
                 Transform.Position += new Vector2(1, 0) * Speed;
             if (Input.GetKey(Keys.A))
                 Transform.Position -= new Vector2(1, 0) * Speed;
-
-            Log.Information("[{ObjectName}] Current position is {PosX}, {PosY}", Name, Transform.Position.X, Transform.Position.Y);
             base.Update(gameTime);
         }
     }

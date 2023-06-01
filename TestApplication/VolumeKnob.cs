@@ -12,15 +12,15 @@ namespace TestApplication
         public override void Update(GameTime gameTime)
         {
             listener ??= GetComponent<AudioListener>();
-            if (Input.GetKeyDown(Keys.PageDown))
+            if (Input.GetKey(Keys.PageDown))
             {
                 listener.GlobalVolume -= 0.01f;
-                listener.GlobalVolume = Math.Clamp(listener.GlobalVolume, 0, 1);
+                listener.GlobalVolume = (float)Math.Round(Math.Clamp(listener.GlobalVolume, 0, 1), 2);
             }
-            if (Input.GetKeyDown(Keys.PageUp))
+            if (Input.GetKey(Keys.PageUp))
             {
                 listener.GlobalVolume += 0.01f;
-                listener.GlobalVolume = Math.Clamp(listener.GlobalVolume, 0, 1);
+                listener.GlobalVolume = (float)Math.Round(Math.Clamp(listener.GlobalVolume, 0, 1), 2);
             }
             base.Update(gameTime);
         }

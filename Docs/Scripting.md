@@ -53,36 +53,38 @@ To use this feature its really simple, you need just to override the Draw call o
 
 Here is the SpriteRenderer as an example:
 ```cs
-using HellFireEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace HellFireEngine
+namespace HellFireEngine.Renderer
 {
     public class SpriteRenderer : MonoBehaviour
     {
         public Texture2D Sprite { get; set; }
+        public Color Color { get; set; } = Color.White;
         public SpriteEffects Effect { get; set; } = SpriteEffects.None;
         public float LayerDepth { get; set; } = 0f;
 
         public override void Dispose()
         {
-            GC.SupressFinalize(this);
+            GC.SuppressFinalize(this);
             Sprite?.Dispose();
             GC.ReRegisterForFinalize(this);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            if (Sprite is null) return;
+
             SpriteBatch.Draw(Sprite,
                 Transform.Position,
                 Sprite.Bounds,
-                Color.White,
-                Transform.Rotation,
+                Color,
+                Transform.Rotation, 
                 Sprite.Bounds.Center.ToVector2(),
-                Transform.Scale,
-                Effect,
+                Transform.Scale, 
+                Effect, 
                 LayerDepth);
         }
     }

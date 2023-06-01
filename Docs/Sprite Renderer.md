@@ -1,7 +1,7 @@
 # How to use the Sprite Renderer:
 The Sprite Renderer lets you draw a simple texture to the screen, and have it respect position, rotation and scale, along with some effect and depth.
 
-Here is how you will add it to a object in the Scenes LoadContent function:
+Here is how you will add it to a object in the Scenes `LoadContent` function:
 ```cs
 var spriteRendererObject = new GameObject(new Vector2(50f, 50f), 0f, new Vector2(1f, 1f), SceneManager);
 var spriteRenderer = new SpriteRenderer

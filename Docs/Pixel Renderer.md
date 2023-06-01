@@ -10,7 +10,7 @@ That in mind, here is how to use the Pixel Renderer
 # How to use the Pixel Renderer:
 The Pixel Renderer is a way to draw single pixels to the screen.
 
-Here is how you will add it to a object in the Scenes LoadContent function:
+Here is how you will add it to a object in the Scenes `LoadContent` function:
 ```cs
 var pixelRendererObject = new GameObject(new Vector2(50f, 50f), 0f, new Vector2(1f, 1f), SceneManager);
 var pixelRenderer = new PixelRenderer()

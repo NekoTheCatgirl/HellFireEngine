@@ -14,8 +14,9 @@ Log.Logger = new LoggerConfiguration()
 This will create a logger that writes to the console.
 
 # Engine options:
-As of right now, there is just 1 option available, and that is to set if the engine should log its own things or not, turning it off will not prevent any logging calls you make from going trough.
+The engine options container lets you modify some values before starting the scene manager, and will change the look and behavior of the engine.
 
+## Logger:
 To disable the Engine default logging you simply add this to the Program.cs:
 ```cs
 EngineOptions.EnableLogger = false;
@@ -23,3 +24,18 @@ EngineOptions.EnableLogger = false;
 The logger is on by default.
 
 However the Engine logging wont show unless you follow the steps to setup a logger
+
+## Fullscreen mode:
+To force a fullscreen mode you will simply add this:
+```cs
+EngineOptions.ForceFullscreen = true;
+```
+The fullscreen is off by default.
+
+## Screen size:
+To change the screen size, to a custom value, you can do this:
+```cs
+EngineOptions.ScreenWidth = 1000;
+EngineOptions.ScreenHeight = 500;
+```
+The default screen size is 800x480
